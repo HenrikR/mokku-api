@@ -1,0 +1,19 @@
+{
+  "name": "mokku-api",
+  "version": "0.0.1",
+  "description": "A mock REST API",
+  "repository": "https://github.com/HenrikR/mokku-api",
+  "private": true,
+  "engines": {
+    "node": ">=4.4",
+    "npm": ">=3.8.0"
+  },
+  "devDependencies": {
+    "casual": "^1.5.3",
+    "json-server": "^0.8.16",
+    "lodash": "^4.13.1"
+  },
+  "scripts": {
+    "start": "json-server --watch db.js --routes routes.json"
+  }
+}
