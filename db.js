@@ -51,9 +51,10 @@ module.exports = function() {
   ];
 
   //objects
-  data.define('image', function(size) {
+  data.define('image', function(size, id) {
+    var id = id || _.random(100, 500);
     var size = size || '240x240';
-    return 'https://unsplash.it/' + size + '?image=' + _.random(100, 500);
+    return 'https://unsplash.it/' + size + '?image=' + id;
     // return 'http://loremflickr.com/' + size + '/live?random=' +  _.random(100, 500);
     // request('http://www.splashbase.co/api/v1/images/search?query=people', function(error, response, body) {
     //   if (!error && response.statusCode == 200)
@@ -152,14 +153,15 @@ module.exports = function() {
     //events/:id
     events: _.times(100, function (n) {
       var performer = data.performer;
+      var image_id = _.random(100, 500);
       return {
         id: 100 + n,
         name: performer,
         date: data.date_future,
         images: {
-          small: data.image('160x160'),
-          medium: data.image(),
-          large: data.image('320x320'),
+          small: data.image('160x160', image_id),
+          medium: data.image('240x240', image_id),
+          large: data.image('320x320', image_id),
         },
         categories: data.category,
         performers: data.performers({'id': _.random(1000, 9999), 'name': performer}),
