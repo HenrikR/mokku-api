@@ -180,38 +180,38 @@ module.exports = function() {
     }),
 
     //search
-    search: {
-      events: _.times(3, function(n) {
-        var performer = data.performer;
-        var category = data.category;
-        return {
-          id: 100 + n,
-          name: performer,
-          performer: performer,
-          date: data.date_future,
-          venue: data.venue,
-          category: category[1].name,
-          image: data.image()
-        }
-      }),
-      performers: _.times(3, function(n) {
-        return {
-          id: 1000 + n,
-          name: data.performer,
-          category: data.category[1].name,
-          image: data.image()
-        }
-      }),
-      venues: _.times(3, function(n) {
-        return {
-          id: 1000 + n,
-          name: data.venue,
-          image: data.image()
-        }
-      })
-    }
-
+    search: []
   }
+
+  _.times(100, function(n) {
+    var performer = data.performer;
+    var category = data.category;
+    api.search.push ({
+      type: 'event',
+      id: 100 + n,
+      name: performer,
+      performer: performer,
+      date: data.date_future,
+      venue: data.venue,
+      category: category[1].name,
+      image: data.image()
+    });
+
+    api.search.push ({
+      type: 'performer',
+      id: 1000 + n,
+      name: data.performer,
+      category: data.category[1].name,
+      image: data.image()
+    });
+
+    api.search.push ({
+      type: 'venue',
+      id: 1000 + n,
+      name: data.venue,
+      image: data.image()
+    });
+  })
 
   return api;
 }
