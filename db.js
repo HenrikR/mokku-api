@@ -123,7 +123,7 @@ module.exports = function() {
         images: {
           small: data.image('160x160'),
           medium: data.image(),
-          large: data.image('320x320'),
+          large: data.image('320x320')
         },
         categories: data.category
       }
@@ -159,9 +159,9 @@ module.exports = function() {
         name: performer,
         date: data.date_future,
         images: {
-          small: data.image('160x160', image_id),
-          medium: data.image('240x240', image_id),
-          large: data.image('320x320', image_id),
+          small: data.image('320x320', image_id),
+          medium: data.image('640x640', image_id),
+          large: data.image('1024x1024', image_id)
         },
         categories: data.category,
         performers: data.performers({'id': _.random(1000, 9999), 'name': performer}),
@@ -176,28 +176,29 @@ module.exports = function() {
         tickets: {
           price_lowest: _.random(0, 50),
           price_highest: _.random(50, 100),
-          quantity: _.random(0, 300),
+          quantity: _.random(0, 300)
         }
       }
     }),
 
     //search
     search: []
-  }
+  };
 
-  _.times(100, function(n) {
-    var performer = data.performer;
-    var category = data.category;
+  _.each(api.events, function (event) {
     api.search.push ({
       type: 'event',
-      id: 100 + n,
-      name: performer,
-      performer: performer,
-      date: data.date_future,
-      venue: data.venue,
-      category: category[1].name,
-      image: data.image()
+      id: event.id,
+      name: event.name,
+      performer: event.performers[0].name,
+      date: event.date,
+      venue: event.venue.name,
+      category: event.categories[1].name,
+      image: event.images.small
     });
+  });
+  _.times(100, function(n) {
+    var performer = data.performer;
 
     api.search.push ({
       type: 'performer',
@@ -213,7 +214,7 @@ module.exports = function() {
       name: data.venue,
       image: data.image()
     });
-  })
+  });
 
   return api;
-}
+};
