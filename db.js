@@ -181,6 +181,15 @@ module.exports = function() {
       }
     }),
 
+    //location/:id
+    locations: _.times(1000, function (n) {
+      return {
+        id: n,
+        city: data.city + ', ' + data.state_abbr,
+        popularity: data.integer(from = 0, to = 1000)
+      }
+    }),
+
     //search
     search: []
   };
