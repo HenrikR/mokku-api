@@ -154,6 +154,8 @@ module.exports = function() {
     events: _.times(100, function (n) {
       var performer = data.performer;
       var image_id = _.random(100, 500);
+      var city = n > 50 ? 'New York' : data.city;
+      var state = n > 50 ? 'NY' : data.state_abbr;
       return {
         id: 100 + n,
         name: performer,
@@ -168,6 +170,8 @@ module.exports = function() {
         venue: {
           id: 1,
           name: data.venue,
+          city: city,
+          state: state,
           location: {
             lat: data.latitude,
             lng: data.longitude
@@ -177,7 +181,8 @@ module.exports = function() {
           price_lowest: _.random(0, 50),
           price_highest: _.random(50, 100),
           quantity: _.random(0, 300)
-        }
+        },
+        popularity: data.integer(from = 0, to = 1000)
       }
     }),
 
@@ -189,6 +194,16 @@ module.exports = function() {
         popularity: data.integer(from = 0, to = 1000)
       }
     }),
+
+    //geoip
+    geoip: {
+      city: 'New York',
+      state: 'NY',
+      coordinates : {
+        lat: 40.714353,
+        lng: -74.005973
+      }
+    },
 
     //search
     search: []
@@ -221,6 +236,8 @@ module.exports = function() {
       type: 'venue',
       id: 1000 + n,
       name: data.venue,
+      city: data.city,
+      state: data.state_abbr,
       image: data.image()
     });
   });
