@@ -53,7 +53,7 @@ module.exports = function() {
   //objects
   data.define('image', function(size, id) {
     var id = id || _.random(100, 500);
-    var size = size || '240x240';
+    var size = size || '240/180';
     return 'https://unsplash.it/' + size + '?image=' + id;
     // return 'http://loremflickr.com/' + size + '/live?random=' +  _.random(100, 500);
     // request('http://www.splashbase.co/api/v1/images/search?query=people', function(error, response, body) {
@@ -121,9 +121,9 @@ module.exports = function() {
         nickname: '',
         url: '/' + S(performer).slugify().s + '-tickets',
         images: {
-          small: data.image('160x160'),
+          small: data.image('160/100'),
           medium: data.image(),
-          large: data.image('320x320')
+          large: data.image('320/200')
         },
         categories: data.category
       }
@@ -151,9 +151,9 @@ module.exports = function() {
     }),
 
     //events/:id
-    events: _.times(100, function (n) {
-      var performer = data.performer;
-      var image_id = _.random(100, 500);
+    events: _.times(1000, function (n) {
+      var performer = (n > 60 && n < 70) ? data.performer + ' & ' + data.performer + ' Live Festival' : data.performer;
+      var image_id = _.random(100, 1000);
       var city = n > 50 ? 'New York' : data.city;
       var state = n > 50 ? 'NY' : data.state_abbr;
       return {
@@ -161,9 +161,9 @@ module.exports = function() {
         name: performer,
         date: data.date_future,
         images: {
-          small: data.image('320x320', image_id),
-          medium: data.image('640x640', image_id),
-          large: data.image('1024x1024', image_id)
+          small: data.image('320/200', image_id),
+          medium: data.image('640/400', image_id),
+          large: data.image('1024/640', image_id)
         },
         categories: data.category,
         performers: data.performers({'id': _.random(1000, 9999), 'name': performer}),

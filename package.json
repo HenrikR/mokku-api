@@ -16,6 +16,8 @@
     "string": "^3.3.1"
   },
   "scripts": {
-    "start": "json-server --watch db.js --routes routes.json"
+    "start": "json-server --watch db.js --routes routes.json",
+    "slower": "json-server --watch db.js --routes routes.json --delay 3000",
+    "slow": "json-server --watch db.js --routes routes.json --delay 1500"
   }
 }
