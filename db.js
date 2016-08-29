@@ -136,6 +136,7 @@ module.exports = function() {
         id: 1000 + n,
         name: venue,
         url: '/venue/' + S(venue).slugify().s + '-tickets',
+        description: venue + ' description',
         address: {
           street: data.address1,
           city: data.city,
@@ -146,6 +147,11 @@ module.exports = function() {
         location: {
           lat: data.latitude,
           lng: data.longitude
+        },
+        images: {
+          small: data.image('160x160'),
+          medium: data.image(),
+          large: data.image('320x320')
         }
       }
     }),
@@ -167,6 +173,57 @@ module.exports = function() {
         },
         categories: data.category,
         performers: data.performers({'id': _.random(1000, 9999), 'name': performer}),
+        showtimes:[
+          {
+            id: 1000 + n,
+            date: data.date_future,
+            performers: data.performers({'id': _.random(1000, 9999), 'name': performer}),
+            ticketTypes: [
+              {
+                id: 10000 + n,
+                name: "General Admission",
+                description: "Includes open bar - gratuity not included.",
+                price: _.random(0, 50),
+                quantity: _.random(0, 300),
+                status: "On Sale"
+              },
+              {
+                id: 10000 + n,
+                name: "Vip",
+                description: "Includes open bar - gratuity not included.",
+                price: _.random(0, 50),
+                quantity: _.random(0, 300),
+                status: "On Sale"
+              }
+            ],
+            popularity: data.integer(from = 0, to = 1000),
+          },
+          {
+            id: 2000 + n,
+            date: data.date_future,
+            performers: data.performers({'id': _.random(1000, 9999), 'name': performer}),
+
+            ticketTypes: [
+              {
+                id: 11000 + n,
+                name: "General Admission",
+                description: "Includes open bar - gratuity not included.",
+                price: _.random(0, 50),
+                quantity: _.random(0, 300),
+                status: "On Sale"
+              },
+              {
+                id: 11000 + n,
+                name: "Vip",
+                description: "Includes open bar - gratuity not included.",
+                price: _.random(0, 50),
+                quantity: _.random(0, 300),
+                status: "On Sale"
+              }
+            ],
+            popularity: data.integer(from = 0, to = 1000)
+          }
+        ],
         venue: {
           id: 1,
           name: data.venue,
@@ -218,7 +275,8 @@ module.exports = function() {
       date: event.date,
       venue: event.venue.name,
       category: event.categories[1].name,
-      image: event.images.small
+      image: event.images.small,
+      showtimes: event.showtimes
     });
   });
   _.times(100, function(n) {
