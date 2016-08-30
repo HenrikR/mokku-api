@@ -273,9 +273,11 @@ module.exports = function() {
       name: event.name,
       performer: event.performers[0].name,
       date: event.date,
-      venue: event.venue.name,
+      venue: event.venue,
       category: event.categories[1].name,
+      images: event.images,
       image: event.images.small,
+      tickets: event.tickets,
       showtimes: event.showtimes
     });
   });
